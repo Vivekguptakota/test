@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file my_module.module
+ * TODO: This module is using for making changes in admin site information setting form.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function my_module_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == "system_site_information_settings"){
+    $form['siteapikey'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Site API Key'),
+      '#default_value' => variable_get('siteapikey','No API Key yet'),
+    );
+    $form['actions']['submit']['#value'] = "Update Configuration";
+    // extra submit form handle
+    $form['#submit'][] = 'mysiteinfo_form_submit';
+  }
+}
+
+// handle form submition 
+function mysiteinfo_form_submit($form, &$form_state){
+  drupal_set_message(t('Site API Key has been saved with '.$form_state['values']['siteapikey'].' value'));
+}
+
+/**
+ * Implements hook_menu().
+ */
+function my_module_menu() {  
+  $items['page_json/%/%node'] = array(
+    'title' => 'page_json',
+    'page callback' => 'page_json_callback',
+    'page arguments' => array(1,2),
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+* Callback for page_json page
+*/
+function page_json_callback($api_key = '', $node = ''){
+  $key_data = variable_get('siteapikey');
+  if($node->type == "page" && $key_data == $api_key && $node->nid){   // Validate all given condition
+    $node->body['und'][0]['safe_value'] = htmlspecialchars($node->body['und'][0]['safe_value']);
+    echo  json_encode($node);
+  }
+  else{
+    drupal_access_denied();
+  }
+} 
+?>
