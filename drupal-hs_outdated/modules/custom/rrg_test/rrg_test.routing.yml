@@ -1,0 +1,8 @@
+
+rrg_test.rrg_test_nodecheck:
+  path: 'page_json/{key}/{id}'
+  defaults:
+    _controller: '\Drupal\rrg_test\Controller\rrg_test::nodecheck'
+    _title: 'pagejson'
+  requirements:
+    _permission: 'access content'

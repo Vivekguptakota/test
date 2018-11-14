@@ -1,0 +1,9 @@
+
+hs_send_invite.send_invite:
+  path: '/hs_send_invite/form/send_invite'
+  defaults:
+    _form: '\Drupal\hs_send_invite\Form\SendInvite'
+    _title: 'SendInvite'
+  requirements:
+    _access: 'TRUE'
+  

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains hs_cal.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function hs_cal_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the hs_cal module.
+    case 'help.page.hs_cal':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Calender for dashboard') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hs_cal_theme() {
+  return [
+    'hs_cal' => [
+      'variables' => array('newtest' => ''),
+    ],
+  ];
+}

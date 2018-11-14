@@ -1,0 +1,8 @@
+
+services:
+  hs_helper.functions:
+    class: Drupal\hs_helper\Utility\HsRestHelper
+  hs_helper.login:
+    class: Drupal\hs_helper\HsLogin
+    arguments: ['@serialization.json']
+

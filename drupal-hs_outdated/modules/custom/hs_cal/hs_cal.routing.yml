@@ -1,0 +1,8 @@
+
+hs_cal.hs_calender_fullview:
+  path: 'dashboard/calender'
+  defaults:
+    _controller: '\Drupal\hs_cal\Controller\HsCalender::fullview'
+    _title: 'dashboard'
+  requirements:
+    _permission: 'access content'

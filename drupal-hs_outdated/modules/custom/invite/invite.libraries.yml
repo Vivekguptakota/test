@@ -1,0 +1,12 @@
+invite.provider_form.invite:
+  version: 1.x
+  css:
+    theme:
+      css/invite.css: {}
+  js:
+    js/invite.js: {}
+    js/wickedpicker.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.ui.datepicker

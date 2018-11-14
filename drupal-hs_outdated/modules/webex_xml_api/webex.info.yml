@@ -1,0 +1,11 @@
+name: WebEx
+description: Webex Module
+type: module
+# core: 8.x
+package: Custom
+
+# Information added by Drupal.org packaging script on 2016-11-02
+version: '8.x-1.0'
+core: '8.x'
+project: 'webex_xml_api'
+datestamp: 1478111657

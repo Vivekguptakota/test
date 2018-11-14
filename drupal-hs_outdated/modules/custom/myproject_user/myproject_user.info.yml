@@ -1,0 +1,7 @@
+name: myproject_user
+type: module
+description: menus
+core: 8.x
+package: Custom
+dependencies:
+  - menu

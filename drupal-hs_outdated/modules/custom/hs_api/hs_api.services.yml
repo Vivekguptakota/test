@@ -1,0 +1,5 @@
+services:
+  hs_api.getuser:
+    class: Drupal\hs_api\GetUserList
+    arguments: []
+

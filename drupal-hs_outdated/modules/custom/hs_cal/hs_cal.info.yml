@@ -1,0 +1,5 @@
+name: hs_cal
+type: module
+description: Calender for dashboard
+core: 8.x
+package: Custom

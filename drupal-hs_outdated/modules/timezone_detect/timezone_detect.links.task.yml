@@ -1,0 +1,4 @@
+timezone_detect.admin_form:
+  route_name: timezone_detect.admin_form
+  title: 'Timezone Detect'
+  base_route: timezone_detect.admin_form

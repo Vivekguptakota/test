@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Contains myproject_user.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function myproject_user_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the myproject_user module.
+    case 'help.page.myproject_user':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('menus') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function custom_unsubscribe_function(&$form, FormStateInterface $form_state) {
+    //retrieve current node
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    $nom_module = $node->getTitle();
+
+    //you have to retrieve the field user
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+
+    //test the existence of module in the list
+    $value_occurs = 0;
+    $index = null;
+    $nb_items = $user->field_nom_modules_abonnement->count();
+
+    //$value = $user->field_nom_modules_abonnement->get(1)->value;
+
+    for ($i=0; $i<$nb_items; $i++)
+    {
+        $value = $user->field_nom_modules_abonnement->get($i)->value;
+
+        if ($value == $nom_module)
+        {
+            $value_occurs++;
+            $index = $i;
+
+        }
+    }
+
+    //check index
+    drupal_set_message($index);
+
+    if ($index!=null)
+    {
+        $user->field_nom_modules_abonnement->removeItem($index);
+    }
+}    

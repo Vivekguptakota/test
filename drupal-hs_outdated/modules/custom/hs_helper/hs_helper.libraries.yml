@@ -1,0 +1,4 @@
+hs_mail.schedule_app:
+  css:
+    theme:
+      css/schedule_mail.css: {}

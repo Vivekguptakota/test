@@ -1,0 +1,11 @@
+name: Angular js form example
+type: module
+description: Angular js example for adding records in the db
+# core: 8.x
+package: Other
+
+# Information added by Drupal.org packaging script on 2017-04-11
+version: '8.x-1.2'
+core: '8.x'
+project: 'angular_js_example'
+datestamp: 1491899946

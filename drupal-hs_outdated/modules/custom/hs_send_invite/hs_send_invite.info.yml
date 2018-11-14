@@ -1,0 +1,5 @@
+name: hs_send_invite
+type: module
+description: This is temprory module for send invitation
+core: 8.x
+package: Custom

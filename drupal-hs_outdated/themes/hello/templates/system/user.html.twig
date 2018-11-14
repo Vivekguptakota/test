@@ -1,0 +1,178 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ *
+ * @ingroup themeable
+ */
+#}
+<!-- <h2>MY ACCOUNT</h2> -->
+<div class="userprofile upperpart">
+  <div class="main-title">Profile
+    {% if allow_edit and user_other_role != 1%}
+      <a class="pull-right" href="/user/{{userId}}/edit">Edit</a>
+    {% endif %}
+  </div>
+  <div class="left col-sm-2">
+    {% if content.user_picture %}
+    <div class="profile-pic">
+      {{ content.user_picture }}
+      {% if allow_edit %}
+        <a href="/user/{{userId}}/edit#edit-user-picture-wrapper">Upload</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="right col-sm-10">
+    <div class="field field--name">
+      <label>NAME</label>
+      <div class="field-value full-name">{{ content.field_first_name }} {{ content.field_last_name }}</div>
+    </div>
+    <div class="field field--email">
+      <label>EMAIL</label>
+      <div class="field-value user-email">{{ user.mail.0.value }}</div>
+    </div>
+    <div class="field field--password">
+      <label>PASSWORD</label>
+      <div class="field-value password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+    </div>
+
+    {% if user_role_patient %}
+    {% if content.field_date_of_birth|render|trim is not empty %}
+    <div class="field field--phone">
+      <label>DOB</label>
+      <div class="field-value phone-number">{{ content.field_date_of_birth }}</div>
+    </div>
+    {% endif %}
+
+    {# if content.field_mrn|trim is not empty #}
+    <div class="field field--phone">
+      <label>MRN</label>
+      <div class="field-value phone-number">{{ content.field_mrn }}</div>
+    </div>
+    {# endif #}
+
+    {% if content.field_gender|render|trim is not empty %}
+    <div class="field field--phone">
+      <label>GENDER</label>
+      <div class="field-value phone-number">{{ content.field_gender }}</div>
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="field field--phone">
+      <label>PHONE NUMBER</label>
+      <div class="field-value phone-number">{{ content.field_phone_number }}</div>
+    </div>
+
+    {% if content.field_phone_number|trim is not empty %}
+    <div class="field field--phone">
+      <label>PHONE</label>
+      <div class="field-value phone-number">{{ content.field_phone_number }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if user_role_patient or user_role_provider %}
+<div class="userprofile middlepart">
+  <div class="main-title">Preference</div>
+    {% if field_user_preference == 0 %}
+    <div class="content-wrapper prefernces-content">
+      <div class="prefrences-descritpion"><b>Get email or text notifications from Hello Session</b></div>
+      <div class="email-me">
+        <input type="radio" checked disabled />&nbsp;&nbsp;Email me at: {{ user_pref_email }}
+       </div>
+        <div class="text-me">
+        <input type="radio" disabled />&nbsp;&nbsp;Text me at: {{ user_pref_country_code }}{{ user_pref_phone }}
+      </div>
+      {% if allow_edit %}
+        <div class="add-buttons">
+          <div class="add-email"><a href="/user/{{userId}}/edit#edit-field-user-preference--wrapper">Add email</a></div>
+          <div class="add-text"><a href="/user/{{userId}}/edit#edit-field-user-preference--wrapper">Add phone</a></div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if field_user_preference == 1 %}
+    <div class="content-wrapper prefernces-content">
+      <div class="prefrences-descritpion"><b>Get email or text notifications from Hello Session</b></div>
+      <div class="email-me">
+        <input type="radio" disabled />&nbsp;&nbsp;Email me at: {{ user_pref_email }}
+       </div>
+       <div class="text-me">
+        <input type="radio" checked disabled />&nbsp;&nbsp;Text me at: {{ user_pref_country_code }}{{ user_pref_phone }}
+       </div>
+       {% if allow_edit %}
+         <div class="add-buttons">
+           <div class="add-email"><a href="/user/{{userId}}/edit#edit-field-user-preference--wrapper">Add email</a></div>
+           <div class="add-text"><a href="/user/{{userId}}/edit#edit-field-user-preference--wrapper">Add phone</a></div>
+         </div>
+       {% endif %}
+     </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if user_role_patient %}
+
+{% if content.field_insurance_provider|render|trim is not empty or  content.field_patient_id|render|trim is not empty %}
+<div class="userprofile insurance">
+  <div class="main-title">Insurance</div>
+  <div class="content-wrapper insurance-content">
+    {% if content.field_insurance_provider|render|trim is not empty %}
+    <div class="provider">
+      <label>Provider</label>
+      <!-- <div class="provider-name">Harvard Pilgrim</div> -->
+      {{ content.field_insurance_provider }}
+    </div>
+    {% endif %}
+
+    {% if content.field_patient_id|render|trim is not empty %}
+    <div class="field--patient-id">
+     <label>Patient ID</label>
+      {{ content.field_patient_id }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endif %}
+
+
+ {% if content.field_degree|render|trim is not empty or
+ content.field_speciality|render|trim is not empty or content.field_institute|render|trim is not empty %}
+  <div class="userprofile background">
+    <div class="main-title">Background</div>
+    <div class="field degree">{{ content.field_degree }}</div>
+    <!-- <div class="field speciality-in">{{ content.field_specialist_in }}</div> -->
+    <div class="field speciality">{{ content.field_speciality }}</div>
+    <div class="field institution">{{ content.field_institute }}</div>
+  </div>
+ {% endif %}
+{% if content.field_undergraduate|render|trim is not empty or content.field_medical_school|render|trim is not empty or content.field_training|render|trim is not empty or content.field_additional|render|trim is not empty %}
+<div class="userprofile training-education 1">
+  <div class="main-title">Training / Education</div>
+  <div class="field undergraduate">{{ content.field_undergraduate }}</div>
+  <div class="field medical-school">{{ content.field_medical_school }}</div>
+  <div class="field training">{{ content.field_training }}</div>
+  <div class="field additional">{{ content.field_additional }}</div>
+</div>
+{% endif %}
+
+<!-- <article{{ attributes }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</article> -->

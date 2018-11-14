@@ -1,0 +1,135 @@
+<?php
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+// Front Page Code
+function hello_preprocess_page(&$variables) {
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  if($is_front == TRUE)  {
+    //echo "<pre>";print_r($variables);die();
+    $send_invite = \Drupal::formBuilder()->getForm('Drupal\invite\Form\ProviderForm');
+    $variables['invitation_form'] = $send_invite;
+    /************************/
+    $patient_form = \Drupal::formBuilder()->getForm('Drupal\hs_invite\Form\UserRoleForm');
+    $variables['patient_form'] = $patient_form;
+    /*if (\Drupal::currentUser()->isAnonymous()) {
+      $patient_form = \Drupal::formBuilder()->getForm('Drupal\hs_invite\Form\UserRoleForm');
+      $variables['patient_form'] = $patient_form;
+    }else{
+      $block = \Drupal\block\Entity\Block::load('exposedformpatient_appointment_calendarpage_month');
+      $variables['patient_form'] = \Drupal::entityManager()->getViewBuilder('block')->view($block);
+    }*/
+
+  }
+  $user = \Drupal::currentUser();
+  $roles = $user->getRoles();
+  if(in_array('provider', $roles)){
+    $variables['role'] = 'Provider';
+  }elseif(in_array('patient', $roles)){
+    $variables['role'] = 'Patient';
+  }else{
+    $variables['role'] = 'Visitor';
+  }
+  $variables['current_user_picture'] = '';
+  $variables['current_user_firstname'] = '';
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  if ($user->get('uid')->value > 0) {
+    if ($user->get('field_first_name')->value) {
+      $variables['current_user_firstname'] = $user->get('field_first_name')->value;
+    }
+    else {
+      $variables['current_user_firstname'] = $user->get('name')->value;
+    }
+    if (!$user->user_picture->isEmpty()) {
+      $variables['current_user_picture'] = $user->user_picture->view('large');
+    }
+    else {
+      $field = \Drupal\field\Entity\FieldStorageConfig::loadByName('user','user_picture')->getSetting('default_image');
+      $file = \Drupal::entityManager()->loadEntityByUuid('file', $field['uuid']);
+      $image = ['#theme' => 'image_style', '#style_name' => 'thumbnail', '#uri' => $file->getFileUri(),];
+      $variables['current_user_picture'] = $image;
+    }
+  }
+}
+
+function hello_preprocess_html(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $path_alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+  $path_alias = ltrim($path_alias, '/');
+  $variables['attributes']['class'][] = \Drupal\Component\Utility\Html::cleanCssIdentifier($path_alias);
+}
+
+/**
+ * Implements hook_preprocess_user().
+ */
+function hello_preprocess_user(&$variables) {
+  $user = \Drupal::currentUser()->getRoles();
+
+  if(in_array('patient', $user)) {
+    $variables['user_role_patient'] = "role-patient";
+  }
+  if(in_array('provider', $user)) {
+    $variables['user_role_provider'] = "role-provider";
+  }
+  $variables['user_pref_email'] = "";
+  $variables['user_pref_country_code'] = "";
+  $variables['user_pref_phone'] = "";
+  $path = \Drupal::request()->getpathInfo();
+  $arg  = explode('/',$path);
+  if ($arg[1] == 'user' && !empty($arg[2])) {
+    $variables['userId'] = $arg[2];
+  }
+  else {
+    $variables['userId'] = \Drupal::currentUser()->id();
+  }
+
+  $entityStorage = Drupal::entityTypeManager()->getStorage('user');
+  $userdata = $entityStorage->load($variables['userId']);
+  if(!empty($userdata->get('field_your_preference_email')->getValue())){
+    foreach($userdata->get('field_your_preference_email')->getValue() as $k => $va){
+      $fieldCollectionItem = \Drupal\field_collection\Entity\FieldCollectionItem::load($va['value']);
+      if($fieldCollectionItem->get('field_make_default_email')->getValue()[0]['value'] == 1){
+        $variables['user_pref_email'] = $fieldCollectionItem->get('field_preference_email')->getValue()[0]['value'];
+      }
+    }
+  }
+  if(!empty($userdata->get('field_your_phone_number')->getValue())){
+    foreach($userdata->get('field_your_phone_number')->getValue() as $k => $va){
+      $fieldCollectionItem = \Drupal\field_collection\Entity\FieldCollectionItem::load($va['value']);
+      if($fieldCollectionItem->get('field_make_default')->getValue()[0]['value'] == 1){
+        $variables['user_pref_country_code'] = $fieldCollectionItem->get('field_country_name_country_code')->getValue()[0]['value'];
+        $variables['user_pref_phone'] = $fieldCollectionItem->get('field_preference_phone_number')->getValue()[0]['value'];
+      }
+    }
+  }
+  if($variables['user_pref_email'] == ""){
+    $variables['user_pref_email'] = $userdata->mail->value;
+  }
+  if($variables['user_pref_phone'] == ""){
+    $variables['user_pref_country_code'] = isset($userdata->field_country_code->value)?"+".$userdata->field_country_code->value:'';
+    $variables['user_pref_phone'] = $userdata->field_phone_number->value;
+  }
+  $variables['field_user_preference'] = $userdata->field_user_preference->value;
+
+  $variables['allow_edit'] = 0;
+  $user = \Drupal::currentUser();
+  $current_uid = $user->id();
+  $roles = $user->getRoles();
+
+  $user_other = \Drupal\user\Entity\User::load($arg[2]);
+  $user_other_role = $user_other->getRoles();
+  $variables['user_other_role'] = 0;
+  if($arg[2] != $current_uid) {
+    $variables['user_other_role'] = in_array('provider', $user_other_role)?1:0;
+  }
+
+  if (in_array('provider', $roles)) {
+    $variables['allow_edit'] = 1;
+  }
+  elseif ($arg[1] == 'user' && !empty($arg[2]) && $arg[2] == $current_uid && in_array('patient', $roles)) {
+    $variables['allow_edit'] = 1;
+  }
+}

@@ -1,0 +1,6 @@
+timezone_detect.settings:
+  type: mapping
+  label: Settings
+  mapping:
+    timezone_detect_success_watchdog:
+      type: boolean

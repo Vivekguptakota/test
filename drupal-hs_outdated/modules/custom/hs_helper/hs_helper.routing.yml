@@ -1,0 +1,15 @@
+hs_helper.call:
+  path: '/hs_helper/fun_call/{id}'
+  defaults:
+    _controller: '\Drupal\hs_helper\Controller\HelpController::displayData'
+    _title: 'User Data'
+  requirements:
+    _access: 'TRUE'
+
+app.create:
+  path: '/app/create'
+  defaults:
+    _controller: '\Drupal\hs_helper\Controller\appCreateController::create_node'
+    _title: 'Node Create'
+  requirements:
+    _access: 'TRUE'

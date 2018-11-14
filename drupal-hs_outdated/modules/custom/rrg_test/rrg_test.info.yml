@@ -1,0 +1,5 @@
+name: RRG Test
+type: module
+description: This is my custom module for altering existing drupal site information
+core: 8.x
+package: Custom

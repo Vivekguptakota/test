@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains hs_send_invite.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function hs_send_invite_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the hs_send_invite module.
+    case 'help.page.hs_send_invite':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is temprory module for send invitation') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hs_send_invite_theme() {
+  return [
+    'hs_send_invite' => [
+      'render element' => 'children',
+    ],
+  ];
+}

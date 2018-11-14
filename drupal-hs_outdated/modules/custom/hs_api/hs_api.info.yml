@@ -1,0 +1,7 @@
+name: Hs Api
+type: module
+description: This is custom rest api module
+core: 8.x
+package: Custom
+dependencies:
+  - rest

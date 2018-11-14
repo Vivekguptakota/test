@@ -1,0 +1,396 @@
+@import url('//fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
+@import url('//fonts.googleapis.com/css?family=Lato:400,700');
+/*Color as per Style Guide*/
+/*Font size as per Style Guide*/
+.primary-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 400;
+}
+.secondary-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+}
+.medium-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}
+.thin-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 26px;
+}
+.h1-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 30px;
+  /*letter-spacing: 25px;*/
+  line-height: 40px;
+}
+.h2-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 24px;
+  /*letter-spacing: 25px;*/
+  line-height: 32px;
+}
+.h3-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 20px;
+  /*letter-spacing: 25px;*/
+  line-height: 28px;
+}
+.h4-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 400;
+  font-size: 18px;
+  /*letter-spacing: 25px;*/
+  line-height: 26px;
+}
+.h5-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 18px;
+  /*letter-spacing: 25px;*/
+  line-height: 26px;
+}
+.regular-font {
+  font-family: 'Nunito Sans', sans-serif, icomoon;
+  font-weight: 300;
+  font-size: 16px;
+  /*letter-spacing: 25px;*/
+  line-height: 26px;
+}
+/* Font face for HelloSesssion */
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon/icomoon.eot');
+  src: url('../fonts/icomoon/icomoon.eot?#iefix') format('embedded-opentype'), url('../fonts/icomoon/icomoon.woff') format('woff'), url('../fonts/icomoon/icomoon.ttf') format('truetype'), url('../fonts/icomoon/icomoon.svg') format('svg');
+}
+/*@font-face {font-family: 'MyriadPro';src: url('../fonts/MyriadPro.otf');}*/
+.popup-form-button button.form-submit.btn-primary,
+.popup-form-button .button.js-form-submit.form-submit.btn-default.btn {
+  background: transparent none repeat scroll 0 0;
+  /* border-radius: 0 !important; */
+  color: #f5f5f5;
+  display: block !important;
+  font-size: 16px;
+  border: 1px solid #f5f5f5 !important;
+  height: 40px !important;
+  margin: 35px auto 10px;
+  padding: 9px 9px !important;
+  text-align: center;
+  line-height: 20px;
+  width: 135px !important;
+  font-weight: 700;
+  border-radius: 3px;
+}
+.regular-button button.form-submit.btn-primary,
+.regular-button .button.js-form-submit.form-submit.btn-default.btn {
+  background: #0bced0 none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #f5f5f5;
+  font-size: 18px;
+  border: 1px solid #0bced0;
+  height: 50px;
+  text-align: center;
+  line-height: 20px;
+  width: 180px;
+  font-weight: 700;
+}
+@media (max-width: 990px) {
+  /*Homepage*/
+  header.navbar {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 800px) {
+  /*Generic Classes*/
+  .desktop-element {
+    display: none;
+  }
+  .tablet-element {
+    display: block;
+  }
+  /*Homepage*/
+  #navbar-collapse {
+    max-width: 100%;
+  }
+  header.navbar {
+    padding: 0 20px;
+  }
+  header.navbar.header-expand {
+    padding: 0 0;
+  }
+  header.navbar.header-expand .navbar-toggle.expandable.expand {
+    max-width: 100%;
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    padding: 40px 35px;
+    margin-bottom: 0;
+  }
+  header.navbar.header-expand .navbar-toggle.expandable.expand:before {
+    width: 95%;
+    text-align: left;
+    font-weight: 600;
+    font-size: 26px;
+    padding-left: 55px;
+  }
+  header.navbar.header-expand .navbar-toggle.expandable.expand:after {
+    font-size: 26px;
+  }
+  header.navbar.header-expand #navbar-collapse {
+    margin-top: 40px;
+    max-width: 100%;
+    background: #0bced0;
+  }
+  header.navbar.header-expand #navbar-collapse .region-navigation-collapsible {
+    max-width: 100%;
+  }
+  header.navbar.header-expand #navbar-collapse .region-navigation-collapsible .Login-Register-popup-link {
+    padding: 50px 0;
+  }
+  header.navbar.header-expand #navbar-collapse .region-navigation-collapsible .Login-Register-popup-link > span {
+    margin: 20px 0;
+  }
+  header.navbar.header-expand #navbar-collapse .region-navigation-collapsible .Login-Register-popup-link > span a {
+    background: #ffffff;
+    color: #0bced0;
+    max-width: 225px;
+    height: 65px;
+    padding: 21px 0;
+    font-weight: 600;
+  }
+  header.navbar.header-expand #navbar-collapse .region-navigation-collapsible .Login-Register-popup-link > span:last-child a {
+    background: transparent;
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+  .custom-eform {
+    top: 25vh;
+  }
+  .easy-sessions .field--name-body {
+    max-width: 700px;
+    padding-bottom: 60px;
+  }
+  .easy-sessions .field--name-body h3.title {
+    padding-top: 60px;
+    padding-bottom: 50px;
+  }
+  .easy-sessions .field--name-body .steps-wrapper .step.step2 .image-wrapper {
+    align-self: center;
+  }
+  .easy-sessions .field--name-body .steps-wrapper .step.arrow img {
+    max-width: 60px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper > div {
+    min-height: 500px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper > div .content-wrapper {
+    padding: 0 20px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper > div .content-wrapper p {
+    margin-bottom: 25px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper > div:nth-child(2) .content-wrapper p {
+    margin-bottom: 30px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper > div .desc-image img {
+    max-width: 250px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper .corner-image img {
+    max-width: 30px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper .top {
+    top: 15px;
+    left: 15px;
+  }
+  .session-providers-seekers .easy-sessions-wrapper .bottom {
+    bottom: 15px;
+    right: 10px;
+  }
+  .contact-form .webform-submission-contact-form {
+    padding: 0 90px;
+  }
+  .contact-form .webform-submission-contact-form .contact-form-outer-wrapper .panel-body .contact-us-field-wrapper .form-item input,
+  .contact-form .webform-submission-contact-form .contact-form-outer-wrapper .panel-body .contact-us-field-wrapper .form-item select {
+    max-width: 280px;
+  }
+  /*Dashboard Page*/
+  .path-provider-appointment .region.region-content,
+  .path-patient-appointment .region.region-content,
+  .patient-list .region.region-content,
+  .provider-list .region.region-content {
+    padding: 30px 50px 110px;
+  }
+  /*Calendar View*/
+  .path-provider-appointment .views-exposed-form #views-exposed-form-provider-appointment-calendar-page-month input,
+  .path-provider-appointment .views-exposed-form #views-exposed-form-provider-appointment-calendar-page-week input,
+  .path-provider-appointment .views-exposed-form #views-exposed-form-provider-appointment-calendar-page-day input {
+    width: 100%;
+    min-width: 400px;
+    max-width: 400px;
+  }
+  .path-patient-appointment .views-exposed-form #views-exposed-form-patient-appointment-calendar-page-month input,
+  .path-patient-appointment .views-exposed-form #views-exposed-form-patient-appointment-calendar-page-week input,
+  .path-patient-appointment .views-exposed-form #views-exposed-form-patient-appointment-calendar-page-day input {
+    width: 100%;
+    min-width: 400px;
+    max-width: 400px;
+  }
+  .view-provider-appointment-calendar .today .month.day,
+  .view-patient-appointment-calendar .today .month.day {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+  }
+  .view-provider-appointment-calendar .inner .month.day,
+  .view-patient-appointment-calendar .inner .month.day {
+    font-size: 12px;
+  }
+  .view-provider-appointment-calendar .inner .month.day a.past-appointment,
+  .view-patient-appointment-calendar .inner .month.day a.past-appointment {
+    width: 24px;
+    height: 24px;
+    padding: 1px;
+  }
+  .view-provider-appointment-calendar .view-header,
+  .view-patient-appointment-calendar .view-header,
+  .view-provider-appointment-calendar > .view-content,
+  .view-patient-appointment-calendar > .view-content {
+    width: 100%;
+    max-width: 335px;
+    vertical-align: top;
+  }
+  .view-provider-appointment-calendar .view-header,
+  .view-patient-appointment-calendar .view-header {
+    padding: 4px;
+  }
+  .view-provider-appointment-calendar .view-header .calendar-time-view,
+  .view-patient-appointment-calendar .view-header .calendar-time-view {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .view-provider-appointment-calendar .view-header h3,
+  .view-patient-appointment-calendar .view-header h3 {
+    margin-bottom: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 27px;
+  }
+  .view-provider-appointment-calendar .view-header .pager .pager__item.pager__item--next,
+  .view-patient-appointment-calendar .view-header .pager .pager__item.pager__item--next,
+  .view-provider-appointment-calendar .view-header .pager .pager__item.pager__item--previous,
+  .view-patient-appointment-calendar .view-header .pager .pager__item.pager__item--previous {
+    top: -47px;
+  }
+  .view-provider-appointment-calendar > .view-content .calendar-calendar #single-day-container,
+  .view-patient-appointment-calendar > .view-content .calendar-calendar #single-day-container {
+    height: 155px !important;
+  }
+  .view-provider-appointment-calendar > .view-content .calendar-calendar .day-view #single-day-container,
+  .view-patient-appointment-calendar > .view-content .calendar-calendar .day-view #single-day-container {
+    height: 180px !important;
+  }
+  .view-provider-appointment-calendar .attachment,
+  .view-patient-appointment-calendar .attachment {
+    width: 100%;
+    max-width: 330px;
+    vertical-align: top;
+  }
+  .view-provider-appointment-calendar .attachment .view-content,
+  .view-patient-appointment-calendar .attachment .view-content {
+    /*margin-left: 0 !important;*/
+    margin-right: 0 !important;
+    margin-top: -83px !important;
+    height: 286px !important;
+  }
+  .view-provider-appointment-calendar .attachment .view-content .views-row,
+  .view-patient-appointment-calendar .attachment .view-content .views-row {
+    padding: 17px 0;
+  }
+  .view-provider-appointment-calendar .attachment .view-content .views-row .provider-patient-info,
+  .view-patient-appointment-calendar .attachment .view-content .views-row .provider-patient-info {
+    width: 75%;
+  }
+  .view-patient-appointment-calendar .attachment .view-content .views-row {
+    padding: 10px 0;
+  }
+  /*Calendar Theming*/
+  /*.calendar-calendar {
+  	.month-view {
+  	  .full {
+  	  	tr {
+  	  	  &.date-box, &.multi-day
+  	  	  	padding-top: 4px;
+    		padding-bottom: 4px;
+  	  	  }
+  	  	  td { 
+  	  	  	padding-top: 4px;
+  	  	  	padding-bottom: 4px;
+  	  	  }
+  	  	}
+  	  }	  	
+  	}	
+  }*/
+  .calendar-calendar .month-view .full tr.date-box,
+  .calendar-calendar .month-view .full tr.date-box td,
+  .calendar-calendar .month-view .full tr.multi-day,
+  .calendar-calendar .month-view .full tr.multi-day td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .view-patient-appointment-calendar .view-content .calendar-calendar td,
+  .view-provider-appointment-calendar .view-content .calendar-calendar td {
+    padding: 1px !important;
+  }
+  /*Dashboard Listing View*/
+  .patient-list .views-exposed-form #views-exposed-form-export-patient-data-page-1 input,
+  .provider-list .views-exposed-form #views-exposed-form-export-patient-data-page-1 input,
+  .patient-list .views-exposed-form #views-exposed-form-provider-export-data-page-1 input,
+  .provider-list .views-exposed-form #views-exposed-form-provider-export-data-page-1 input {
+    width: 100%;
+    min-width: 400px;
+    max-width: 400px;
+  }
+  .modal-dialog {
+    color: #f5f5f5 !important;
+    margin: 30px auto;
+    width: 100%;
+  }
+  .user-login-form,
+  .user-register-form {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  /*USER Profile Page*/
+  .path-user {
+    /*User Edit Page*/
+  }
+  .path-user .region-content {
+    width: 100%;
+    max-width: 570px;
+  }
+  .path-user .region-content .userprofile .profile-pic a {
+    margin-right: 0;
+  }
+  .path-user .myaccount {
+    padding: 20px 0;
+  }
+  .path-user #bootstrap-panel--3.field-group-fieldset .field--type-field-collection table .field--name-field-country-name-country-code,
+  .path-user #bootstrap-panel--3.field-group-fieldset .field--type-field-collection table .field--name-field-preference-phone-number {
+    width: 42%;
+  }
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 480px;
+    margin: 30px auto;
+    color: #f5f5f5 !important;
+  }
+}

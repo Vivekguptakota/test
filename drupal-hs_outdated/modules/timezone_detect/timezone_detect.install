@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * (Un)installs the Timezone Detect module.
+ */
+
+/**
+ * Load constants.
+ */
+require_once 'timezone_detect.constants.inc';
+
+/**
+ * Implements hook_enable().
+ */
+function timezone_detect_enable() {
+  drupal_set_message(t('The Timezone Detect module was successfully enabled.'), 'status');
+
+  // Set default user timezone to "none." Otherwise this module will not do
+  // anything in its default configuration ("set user timezone only if it
+  // is not set").
+  // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $user_default_timezone = variable_get('user_default_timezone', DRUPAL_USER_TIMEZONE_DEFAULT);
+
+  if ($user_default_timezone != DRUPAL_USER_TIMEZONE_EMPTY) {
+    // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// variable_set('user_default_timezone', DRUPAL_USER_TIMEZONE_EMPTY);
+
+    drupal_set_message(t('Default user timezone set to "empty timezone" for best results with Timezone Detect.'), 'status');
+  }
+
+  // Disable "remind users at login if their time zone is not set." Otherwise
+  // users may be asked to set their timezone on first login even when this
+  // module has already set it via ajax callback.
+  // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $empty_timezone_message = variable_get('empty_timezone_message', 0);
+
+  if ($empty_timezone_message != 0) {
+    // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// variable_set('empty_timezone_message', 0);
+
+    drupal_set_message(t('"Remind users at login if their time zone is not set" set to FALSE for best results with Timezone Detect.'), 'status');
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function timezone_detect_requirements($phase) {
+  $requirements = array();
+  $t = 't';
+
+  // Check that default user timezone is set to "empty timezone", or that
+  // Timezone Detect is configured to update user timezone on every login
+  // (otherwise automatic timezone detection will not work).
+  $default_timezone_okay = FALSE;
+  // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $user_default_timezone = variable_get('user_default_timezone', DRUPAL_USER_TIMEZONE_DEFAULT);
+
+  // @FIXME
+// Could not extract the default value because it is either indeterminate, or
+// not scalar. You'll need to provide a default value in
+// config/install/timezone_detect.settings.yml and config/schema/timezone_detect.schema.yml.
+$timezone_update_mode = \Drupal::config('timezone_detect.settings')->get('timezone_detect_mode');
+  if ($timezone_update_mode != TIMEZONE_DETECT_MODE_DEFAULT || $user_default_timezone == DRUPAL_USER_TIMEZONE_EMPTY) {
+    $default_timezone_okay = TRUE;
+  }
+
+  switch ($phase) {
+    case 'runtime':
+      if (!$default_timezone_okay) {
+        $requirements['timezone_detect'] = array(
+          'title' => $t('Timezone Detect'),
+          'value' => $t('Incompatible default user timezone'),
+          'description' => $t('For automatic timezone detection to work correctly, please change default user timezone to "empty timezone" on your site\'s !regional_settings_url.', array(
+            '!regional_settings_url' => \Drupal::l($t('regional settings page'), \Drupal\Core\Url::fromRoute('system.regional_settings')),
+            )
+          ),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+      break;
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function timezone_detect_uninstall() {
+  \Drupal::config('timezone_detect.settings')->clear('timezone_detect_mode')->save();
+}
+
+/**
+ * Migrate variable used for saving timezone detection mode.
+ */
+function timezone_detect_update_7100() {
+  // @FIXME
+// Could not extract the default value because it is either indeterminate, or
+// not scalar. You'll need to provide a default value in
+// config/install/timezone_detect.settings.yml and config/schema/timezone_detect.schema.yml.
+$current_mode = \Drupal::config('timezone_detect.settings')->get('timezone_detect_update_timezone_every_login');
+  \Drupal::configFactory()->getEditable('timezone_detect.settings')->set('timezone_detect_mode', $current_mode)->save();
+  \Drupal::config('timezone_detect.settings')->clear('timezone_detect_update_timezone_every_login')->save();
+}

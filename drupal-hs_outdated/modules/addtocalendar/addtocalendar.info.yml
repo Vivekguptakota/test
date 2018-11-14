@@ -1,0 +1,13 @@
+name: Add To Calendar
+type: module
+description: 'Add to calendar button to be used for event page.'
+# version: VERSION
+# core: 8.x
+dependencies:
+  - datetime
+
+# Information added by Drupal.org packaging script on 2017-04-26
+version: '8.x-2.0'
+core: '8.x'
+project: 'addtocalendar'
+datestamp: 1493189646

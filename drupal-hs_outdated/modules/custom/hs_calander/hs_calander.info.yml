@@ -1,0 +1,5 @@
+name: hs_calander
+type: module
+description: For creating custom calander
+core: 8.x
+package: Custom

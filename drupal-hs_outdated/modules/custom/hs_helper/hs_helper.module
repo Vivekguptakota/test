@@ -1,0 +1,52 @@
+<?php
+
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
+/*
+* hook_theme()
+*/
+function hs_helper_theme(){
+return [
+ 'mail-body' =>
+ [
+  'variables' => [
+   'text' => '',
+  ],
+ ]
+];
+}
+
+
+
+/**
+* Implements hook_mail().
+*/
+function hs_helper_mail($key, &$message, $params) {
+ $options = array(
+   'langcode' => $message['langcode'],
+ );
+  $theme_body = array(
+      '#theme' => 'mail-body',
+      '#text' => 'Testing mail message',
+      );
+ switch ($key) {
+   case 'schedule_app':
+      $mail_body = drupal_render($theme_body);      
+      $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
+      $message['from'] = 'prasanna.guttala@faichi.com';//\Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Appointment rescheduled');
+      $message['body'][] = $mail_body;
+     break;
+    case 'file_download':
+    $message['headers']['Content-Type'] = 'text/plain;';
+    $message['headers']['Content-disposition'] = 'attachment';
+    $message['from'] = 'prasanna.guttala@faichi.com';//\Drupal::config('system.site')->get('mail');
+    $message['subject'] = t('@title', array('@title' => $params['node_title']), $options);
+    $message['body'][] = Html::escape($params['message']);
+    $message['params']['attachments'][] = $params['attachment'];
+    //echo "@@<pre>";print_r($message);die;
+      break;
+ }
+}

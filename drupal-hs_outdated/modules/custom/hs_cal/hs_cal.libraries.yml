@@ -1,0 +1,12 @@
+hs_cal:
+  css:
+    theme:
+      css/fullcalendar.min.css: {}
+      css/hs_cal.css: {}
+  js:
+    js/moment.min.js: {}
+    js/fullcalendar.min.js: {}
+    js/hs_cal.js: {}
+  dependencies:
+    - core/jquery
+

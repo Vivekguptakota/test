@@ -1,0 +1,17 @@
+
+invite.provider_form:
+  path: '/invite/form/providerform'
+  defaults:
+    _form: '\Drupal\invite\Form\ProviderForm'
+    _title: 'ProviderForm'
+  requirements:
+    _access: 'TRUE'
+  
+invite.optional_msg:
+  path: '/invite/form/optional_msg'
+  defaults:
+    _form: '\Drupal\invite\Form\OptionalMsg'
+    _title: 'OptionalMsg'
+  requirements:
+    _access: 'TRUE'
+  

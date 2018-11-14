@@ -1,0 +1,20 @@
+diff --git a/core/modules/file/config/optional/views.view.files.yml b/core/modules/file/config/optional/views.view.files.yml
+index 053b72d..d292eb5 100644
+--- a/core/modules/file/config/optional/views.view.files.yml
++++ b/core/modules/file/config/optional/views.view.files.yml
+@@ -733,11 +733,13 @@ display:
+     display_options:
+       path: admin/content/files
+       menu:
+-        type: tab
++        type: normal
+         title: Files
+         description: ''
+         menu_name: admin
+-        weight: 0
++        expanded: true
++        parent: system.admin_content
++        weight: '3'
+         context: ''
+       display_description: ''
+       defaults:

@@ -1,0 +1,25 @@
+hs_calander_calendar:
+  path: '/path/calendar'
+  defaults:
+    _title: 'Calendar'
+    _controller: '\Drupal\hs_calander\Controller\CalendarController::calendar'
+  requirements:
+    _permission: 'calendar'
+
+hs_calander_calendar_view:
+  path: '/hs_calander/calendar/view/{id}'
+  defaults:
+    _controller: '\Drupal\ek_projects\Controller\CalendarController::view'
+  requirements:
+    _permission: 'calendar'
+
+hs_calander.test:
+  path: '/admin/config/hs_calander/test'
+  defaults:
+    _form: '\Drupal\hs_calander\Form\Test'
+    _title: 'Test'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
